@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,10 +25,16 @@ class Store
     private $name;
 
     /**
-     * @var Product[] Available product for this store
-     * @ORM\OneToMany(targetEntity="Store", mappedBy="store", cascade={"persist", "remove"})
+     * @var Department[] Departments in the store
+     * @ORM\OneToMany(targetEntity="Department", mappedBy="store", cascade={"persist", "remove"})
      */
-    public $product;
+    public $department;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {

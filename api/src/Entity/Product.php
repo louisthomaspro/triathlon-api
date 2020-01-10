@@ -44,10 +44,10 @@ class Product
     private $quantity;
 
     /**
-     * @var Store Available store for this product
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="product")
+     * @var Department Available department for this product
+     * @ORM\ManyToOne(targetEntity="Department", inversedBy="products")
      */
-    public $store;
+    public $department;
 
 
 
