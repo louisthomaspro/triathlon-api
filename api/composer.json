@@ -8,18 +8,18 @@
         "doctrine/doctrine-migrations-bundle": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "symfony/console": "4.3.*",
-        "symfony/dotenv": "4.3.*",
+        "symfony/console": "4.4.*",
+        "symfony/dotenv": "4.4.*",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "4.3.*",
-        "symfony/maker-bundle": "^1.14",
+        "symfony/framework-bundle": "4.4.*",
         "symfony/mercure-bundle": "^0.2",
-        "symfony/orm-pack": "^1.0",
-        "symfony/yaml": "4.3.*"
+        "symfony/yaml": "4.4.*"
     },
     "require-dev": {
         "api-platform/schema-generator": "^2.1",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/maker-bundle": "^1.11",
+        "symfony/profiler-pack": "^1.0",
+        "symfony/var-dumper": "4.4.*"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -63,7 +63,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.3.*"
+            "require": "4.4.*"
         }
     }
 }

@@ -2,12 +2,13 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-# Register api
+
 register:
     path: /api/v1/register
     controller: App\Controller\AuthController::register
     methods: ['POST']
 
+# Login check to log the user and generate JWT token
 api_login_check:
-    path: /api/v1/login
-    methods: ['POST']
+      path: /api/v1/login
+      methods: ['POST']

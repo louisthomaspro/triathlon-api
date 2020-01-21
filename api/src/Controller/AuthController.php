@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Repository\UsersRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AuthController extends AbstractController
 {
@@ -34,14 +33,14 @@ class AuthController extends AbstractController
      */
     public function register(Request $request)
     {
-        // return new Response($request);
+
         $data = json_decode($request->getContent());
         $newUserData['email']    = $data->email;
         $newUserData['password'] = $data->password;
 
         $user = $this->usersRepository->createNewUser($newUserData);
 
-        return new JsonResponse(sprintf('User %s successfully created', $user->getUsername()));
+        return new Response(sprintf('User %s successfully created', $user->getUsername()));
     }
 
 }
