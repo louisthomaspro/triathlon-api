@@ -337,6 +337,9 @@
     "symfony/options-resolver": {
         "version": "v4.3.8"
     },
+    "symfony/orm-pack": {
+        "version": "v1.0.7"
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.12.0"
     },
