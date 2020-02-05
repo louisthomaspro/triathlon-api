@@ -28,6 +28,7 @@ class Store
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="store")
+     * @ApiSubresource
      */
     private $users;
 

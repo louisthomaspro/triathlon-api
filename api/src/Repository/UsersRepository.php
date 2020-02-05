@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use ApiPlatform\Core\Validator\ValidatorInterface;
+use App\Entity\Store;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -86,9 +87,13 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
      */
     public function createNewUser($data)
     {
+
+        $store = $this->_em->getRepository(Store::class)->findOneBy(['id'=>$data['store']],[]);
+
         $user = new Users();
         $user->setEmail($data['email']);
         $user->setPassword($this->encoder->encodePassword($user, $data['password']));
+        $user->setStore($store);
         // guarantee every new user at least has SELLER
         $user->setRoles(['SELLER']);
         

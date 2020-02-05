@@ -6,17 +6,25 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ApiResource(
+ *      subresourceOperations={
+ *          "api_stores_users_get_subresource"={
+ *              "method"="GET",
+ *              "normalization_context"={"groups"={"users_products:read"}}
+ *          }
+ *      },
  *      collectionOperations={
  *          "post"={"security"="user.hasRole('ADMIN_ROLE')"},
  *          "get"={"security"="user.hasRole('ADMIN_ROLE')"}
  *      },
  *      itemOperations={
- *          "get"={"security"="user.hasRole('ADMIN_ROLE')"},
- *          "delete"={"security"="user.hasRole('ADMIN_ROLE')"}
+ *          "get"={"security"="user.hasRole('STORE_MANAGER')"},
+ *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -28,17 +36,20 @@ class Users implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"users_products:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
+     * @Groups({"users_products:read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"users_products:read"})
      */
     private $roles = [];
 

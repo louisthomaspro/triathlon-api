@@ -43,6 +43,7 @@ class AuthController extends AbstractController
         $data = json_decode($request->getContent());
         $newUserData['email']    = $data->email;
         $newUserData['password'] = $data->password;
+        $newUserData['store'] = $data->store;
 
         $user = $this->usersRepository->createNewUser($newUserData);
 

@@ -14,6 +14,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "method"="GET",
  *              "normalization_context"={"groups"={"stores_products:read"}}
  *          }
+ *      },
+ *      itemOperations={
+ *          "get",
+ *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
