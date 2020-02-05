@@ -1,23 +1,28 @@
 {
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
+        "php": "7.3.14",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
         "doctrine/doctrine-migrations-bundle": "^2.0",
+        "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
-        "symfony/console": "4.3.*",
-        "symfony/dotenv": "4.3.*",
+        "lexik/jwt-authentication-bundle": "^2.6",
+        "symfony/apache-pack": "^1.0",
+        "symfony/console": "4.4.*",
+        "symfony/dotenv": "4.4.*",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "4.3.*",
+        "symfony/framework-bundle": "4.4.*",
         "symfony/mercure-bundle": "^0.2",
-        "symfony/yaml": "4.3.*"
+        "symfony/yaml": "4.4.*"
     },
     "require-dev": {
         "api-platform/schema-generator": "^2.1",
+        "hautelook/alice-bundle": "^2.7",
         "symfony/maker-bundle": "^1.11",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "symfony/var-dumper": "4.4.*"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -44,7 +49,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.3.14"
+        }
     },
     "scripts": {
         "auto-scripts": {
@@ -52,7 +60,11 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "mkdir -p config/jwt",
+            "echo \"$JWT_PASSPHRASE\" | openssl genpkey -out config/jwt/private.pem -pass stdin -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096",
+            "echo \"$JWT_PASSPHRASE\" | openssl pkey -in config/jwt/private.pem -passin stdin -out config/jwt/public.pem -pubout",
+            "chmod -R 644 config/jwt/*"
         ],
         "post-update-cmd": [
             "@auto-scripts"
@@ -61,7 +73,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.3.*"
+            "require": "4.4.*"
         }
     }
 }

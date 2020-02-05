@@ -1,0 +1,129 @@
+App\Entity\Seller:
+    seller_1:
+      url: destination-legumes
+      name: Destination Légumes
+      shortDescription: Distributeur de panier de légumes aux entreprises de Lille.
+      longDescription: Depuis des années...
+
+App\Entity\Users:
+  users_1:
+    email: louisthomas.pro@gmail.com
+    roles: ["ADMIN_ROLE", "SELLER_ROLE", "USER_ROLE"]
+    password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
+    seller: '@seller_1'
+
+App\Entity\Product:
+  product_1:
+    name: Aubergines
+    unit: kg
+    sellingPrice: 4.60
+    buyingPrice: 3.00
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+  product_2:
+    name: Betteraves
+    unit: kg
+    sellingPrice: 1.80
+    buyingPrice: 1.00
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+  product_3:
+    name: Betteraves cuites
+    unit: kg
+    sellingPrice: 4.50
+    buyingPrice: 3.00
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+  product_4:
+    name: Brocolis
+    unit: kg
+    sellingPrice: 5.10
+    buyingPrice: 4.00
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+  product_5:
+    name: Butternut
+    unit: u
+    sellingPrice: 3.40
+    buyingPrice: 2.00
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+  product_6:
+    name: Carottes couleurs
+    unit: kg
+    sellingPrice: 3.50
+    buyingPrice: 2.50
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+  product_7:
+    name: Celeri rave
+    unit: u
+    sellingPrice: 1.90
+    buyingPrice: 1.00
+    seller: '@seller_1'
+    quantityMin: 1
+    quantityMax: 10
+    quantityInc: 1
+
+App\Entity\Basket:
+  basket_1:
+    name: Panier Saison
+    description: Fusce cursus dolor eget quam egestas, a ultrices est ultrices.
+    personalized: false
+    sellingPrice: 18.0
+    quantityPerson: 1-2
+    seller: '@seller_1'
+  basket_2:
+    name: Panier Découverte
+    description: Nulla suscipit mattis ante a condimentum.
+    personalized: false
+    sellingPrice: 10.0
+    quantityPerson: 2-3
+    seller: '@seller_1'
+  basket_3:
+    name: Panier Couple
+    description: Suspendisse potenti. Vestibulum ornare faucibus porta.
+    personalized: false
+    sellingPrice: 15.0
+    quantityPerson: 2-3
+    seller: '@seller_1'
+  basket_4:
+    name: Panier Familial
+    description: Proin mattis est eget magna placerat, id eleifend risus bibendum.
+    personalized: false
+    sellingPrice: 20.0
+    quantityPerson: 3-4
+    seller: '@seller_1'
+  basket_5:
+    name: Panier Personnalisé
+    description: null
+    personalized: true
+    sellingPrice: 0.0
+    quantityPerson: 
+    seller: '@seller_1'
+
+App\Entity\ProductItem:
+  product_item_1:
+    quantity: 2.5
+    product: '@product_1'
+    basket: '@basket_1'
+  product_item_2:
+    quantity: 5
+    product: '@product_2'
+    basket: '@basket_1'
+  product_item_3:
+    quantity: 2
+    product: '@product_1'
+    basket: '@basket_2'

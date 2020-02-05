@@ -8,20 +8,43 @@ parameters:
 services:
     # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
+        autowire: true # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        resource: "../src/*"
+        exclude: "../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}"
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
+        resource: "../src/Controller"
+        tags: ["controller.service_arguments"]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Repositories
+    app.user.repository:
+        class: App\Repository\UsersRepository
+        arguments:
+            - Symfony\Bridge\Doctrine\RegistryInterface
+            - Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface
+
+
+    # Events::AUTHENTICATION_SUCCESS - Adding public data to the JWT response (not working because we are creating the JWT token programmatically)
+    # https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/2-data-customization.md#eventsauthentication_success---adding-public-data-to-the-jwt-response
+    acme_api.event.authentication_success_listener:
+        class: App\EventListener\AuthenticationListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+    
+    # Events::JWT_CREATED - Adding custom data or headers to the JWT
+    # https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/2-data-customization.md#eventsjwt_created---adding-custom-data-or-headers-to-the-jwt      
+    acme_api.event.jwt_created_listener:
+        class: App\EventListener\AuthenticationListener
+        arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }

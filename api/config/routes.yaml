@@ -1,3 +1,20 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+
+register:
+    path: /api/v1/register
+    controller: App\Controller\AuthController::register
+    methods: ['POST']
+
+register_google:
+    path: /api/v1/google/register
+    controller: App\Controller\AuthController::registerWithGoogle
+    methods: ['POST']
+
+# Login check to log the user and generate JWT token
+api_login_check:
+      path: /api/v1/login
+      controller: App\Controller\AuthController::login
+      methods: ['POST']
