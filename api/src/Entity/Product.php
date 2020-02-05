@@ -4,9 +4,18 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      subresourceOperations={
+ *          "api_stores_products_get_subresource"={
+ *              "method"="GET",
+ *              "normalization_context"={"groups"={"stores_products:read"}}
+ *          }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
@@ -15,22 +24,26 @@ class Product
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"stores_products:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"stores_products:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"stores_products:read"})
      */
     private $quantity;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Store", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"stores_products:read"})
      */
     private $store;
 

@@ -39,13 +39,13 @@ class UserManager extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $userData = $em->getRepository(Users::class)->findOneBy(['email'=>$user->getEmail()],[]);
-        $seller = $userData->getSeller();
+        $store = $userData->getStore();
 
 
         $data['id'] = $userData->getId();
         $data['email'] = $userData->getEmail();
         $data['roles'] = $userData->getRoles();
-        $data['seller_url'] = is_null($seller) ? null : $seller->getUrl();
+        $data['store'] = $store->getId();
         $responseData = ['token' => $token, 'data' => $data];
 
         return $this->json($responseData, 200);

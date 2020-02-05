@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource()
@@ -32,6 +33,7 @@ class Store
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="store")
+     * @ApiSubresource
      */
     private $products;
 
