@@ -16,16 +16,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          }
  *      },
  *      collectionOperations={
- *          "post"={"security"="user.hasRole('STORE_MANAGER')"},
+ *          "post"={"security"="user.hasRole('ROLE_STORE_MANAGER')"},
  *          "get"={
- *              "security"="user.hasRole('ADMIN')",
+ *              "security"="user.hasRole('ROLE_ADMIN')",
  *              "normalization_context"={"groups"={"products:read"}}
  *          }
  *      },
  *      itemOperations={
- *          "put"={"security"="user.hasRole('SELLER')"},
+ *          "put"={"security"="user.hasRole('ROLE_SELLER')"},
  *          "get",
- *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
+ *          "delete"={"security"="user.hasRole('ROLE_STORE_MANAGER')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -36,7 +36,7 @@ class Product
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"stores_products:read", "products:read", "stores:read"})
+     * @Groups({"stores_products:read", "products:read"})
      */
     private $id;
 

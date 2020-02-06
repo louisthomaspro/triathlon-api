@@ -95,7 +95,7 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $user->setPassword($this->encoder->encodePassword($user, $data['password']));
         $user->setStore($store);
         // guarantee every new user at least has SELLER
-        $user->setRoles(['SELLER']);
+        $user->setRoles($data['roles']);
         
         $this->validator->validate($user);
 

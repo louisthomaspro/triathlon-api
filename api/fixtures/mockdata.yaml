@@ -9,26 +9,26 @@ App\Entity\Store:
 App\Entity\Users:
   users_1:
     email: louisthomas.pro@gmail.com
-    roles: ["ADMIN", "STORE_MANAGER", "SELLER"]
+    roles: ["ROLE_ADMIN", "ROLE_STORE_MANAGER", "ROLE_SELLER"]
     password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
   users_2:
     email: user2@gmail.com
-    roles: ["SELLER", "STORE_MANAGER"]
+    roles: ["ROLE_SELLER", "ROLE_STORE_MANAGER"]
     password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
     store: '@store_1'
   users_3:
     email: user3@gmail.com
-    roles: ["SELLER"]
+    roles: ["ROLE_SELLER"]
     password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
     store: '@store_1'
   users_4:
     email: user4@gmail.com
-    roles: ["SELLER", "STORE_MANAGER"]
+    roles: ["ROLE_SELLER", "ROLE_STORE_MANAGER"]
     password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
     store: '@store_2'
   users_5:
     email: user5@gmail.com
-    roles: ["SELLER", "STORE_MANAGER"]
+    roles: ["ROLE_SELLER", "ROLE_STORE_MANAGER"]
     password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
     store: '@store_3'
 

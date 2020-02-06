@@ -19,15 +19,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          }
  *      },
  *      collectionOperations={
- *          "post"={"security"="user.hasRole('ADMIN')"},
+ *          "post"={"security"="user.hasRole('ROLE_ADMIN')"},
  *          "get"={
- *              "security"="user.hasRole('STORE_MANAGER')",
+ *              "security"="user.hasRole('ROLE_STORE_MANAGER')",
  *              "normalization_context"={"groups"={"users:read"}}
  *          }
  *      },
  *      itemOperations={
- *          "get"={"security"="user.hasRole('STORE_MANAGER')"},
- *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
+ *          "get"={"security"="user.hasRole('ROLE_STORE_MANAGER')"},
+ *          "delete"={"security"="user.hasRole('ROLE_STORE_MANAGER')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -46,7 +46,7 @@ class Users implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
-     * @Groups({"users_stores:read", "users:read"})
+     * @Groups({"users_stores:read", "users:read", "stores:read"})
      */
     private $email;
 
