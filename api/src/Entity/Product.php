@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "normalization_context"={"groups"={"stores_products:read"}}
  *          }
  *      },
-*       collectionOperations={
+ *      collectionOperations={
  *          "post"={"security"="user.hasRole('STORE_MANAGER')"},
  *          "get"={
  *              "security"="user.hasRole('ADMIN')",
@@ -36,19 +36,19 @@ class Product
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"stores_products:read", "products:read"})
+     * @Groups({"stores_products:read", "products:read", "stores:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"stores_products:read", "products:read"})
+     * @Groups({"stores_products:read", "products:read", "stores:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"stores_products:read", "products:read"})
+     * @Groups({"stores_products:read", "products:read", "stores:read"})
      */
     private $quantity;
 

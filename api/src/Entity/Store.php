@@ -14,7 +14,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      itemOperations={
  *          "delete"={"security"="user.hasRole('ADMIN')"},
  *          "get"
- *      })
+ *      },
+ *      collectionOperations={
+ *          "post"={"security"="user.hasRole('ADMIN')"},
+ *          "get"={
+ *              "security"="user.hasRole('ADMIN')",
+ *              "normalization_context"={"groups"={"stores:read"}}
+ *          }
+ *      },
+ *      itemOperations={
+ *          "get",
+ *          "delete"={"security"="user.hasRole('ADMIN')"}
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\StoreRepository")
  */
 class Store
@@ -23,23 +35,26 @@ class Store
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"stores:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"products:read"})
+     * @Groups({"products:read", "stores:read"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="store")
+     * @Groups({"stores:read"})
      * @ApiSubresource
      */
     private $users;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="store")
+     * @Groups({"stores:read"})
      * @ApiSubresource
      */
     private $products;
