@@ -41,7 +41,7 @@ class Store
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"products:read", "stores:read"})
+     * @Groups({"products:read", "stores:read", "users:read"})
      */
     private $name;
 
