@@ -9,7 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={
+ *          "delete"={"security"="user.hasRole('ADMIN')"},
+ *          "get"
+ *      })
  * @ORM\Entity(repositoryClass="App\Repository\StoreRepository")
  */
 class Store

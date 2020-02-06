@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          }
  *      },
  *      itemOperations={
+ *          "put"={"security"="user.hasRole('SELLER')"},
  *          "get",
  *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
  *      }

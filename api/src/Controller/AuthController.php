@@ -40,6 +40,8 @@ class AuthController extends AbstractController
     public function register(Request $request)
     {
 
+        $this->denyAccessUnlessGranted('ADMIN');
+
         $data = json_decode($request->getContent());
         $newUserData['email']    = $data->email;
         $newUserData['password'] = $data->password;

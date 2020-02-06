@@ -19,8 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          }
  *      },
  *      collectionOperations={
- *          "post"={"security"="user.hasRole('ADMIN_ROLE')"},
- *          "get"={"security"="user.hasRole('ADMIN_ROLE')"}
+ *          "post"={"security"="user.hasRole('ADMIN')"},
+ *          "get"={"security"="user.hasRole('STORE_MANAGER')"}
  *      },
  *      itemOperations={
  *          "get"={"security"="user.hasRole('STORE_MANAGER')"},
