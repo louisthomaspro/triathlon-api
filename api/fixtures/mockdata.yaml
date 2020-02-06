@@ -1,13 +1,36 @@
 App\Entity\Store:
     store_1:
-      name: Décathlon CAMPUS
+      name: Décathlon Campus
+    store_2:
+      name: Décathlon Tours
+    store_3:
+      name: Decathlon City Lille
 
 App\Entity\Users:
   users_1:
     email: louisthomas.pro@gmail.com
     roles: ["ADMIN", "STORE_MANAGER", "SELLER"]
     password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
+  users_2:
+    email: user2@gmail.com
+    roles: [SELLER"]
+    password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
     store: '@store_1'
+  users_3:
+    email: user3@gmail.com
+    roles: [SELLER"]
+    password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
+    store: '@store_1'
+  users_4:
+    email: user4@gmail.com
+    roles: [SELLER"]
+    password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
+    store: '@store_2'
+  users_5:
+    email: user5@gmail.com
+    roles: [SELLER"]
+    password: \$argon2i\$v=19\$m=65536,t=4,p=1\$SG5yQzlDTGhnRVl5ako2dQ\$Xzn6Xy4Z3iS+R6jdDrdHZHxwP9EIr9esN80NMt+6dmI
+    store: '@store_3'
 
 App\Entity\Product:
   product_1:
@@ -30,3 +53,23 @@ App\Entity\Product:
     name: Balle de foot Kipsta
     quantity: 31
     store: '@store_1'
+  product_6:
+    name: Trotinette Oxelo
+    quantity: 10
+    store: '@store_2'
+  product_7:
+    name: Balle de tennis Artengo
+    quantity: 31
+    store: '@store_2'
+  product_8:
+    name: Corde à sauter Domyos
+    quantity: 24
+    store: '@store_3'
+  product_9:
+    name: Kayak Itiwit
+    quantity: 2
+    store: '@store_3'
+  product_10:
+    name: Canne à pêche Caperlan
+    quantity: 54
+    store: '@store_3'
