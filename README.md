@@ -32,12 +32,12 @@ composer require symfony/apache-pack     ===> YYYYEEEEEESSSSSS
 
 git add --all
 git commit -a -m "My first API Platform app running on Heroku!"
-heroku git:remote -a monpanier-api
+heroku git:remote -a triathlon-api
 git push heroku master
 
 heroku config:set APP_ENV=prod
 
-heroku run bash -a monpanier-api
+heroku run bash -a triathlon-api
 php bin/console doctrine:schema:create
 
 GITHUB
@@ -49,6 +49,6 @@ password: token
 pg_dump -U api-platform api --no-owner --no-acl -f backup.sql
 docker cp CONTAINER_ID:/backup.sql /tmp/backup.sql
 export DATABASE_URL=postgres://$(whoami)
-heroku pg:psql --app monpanier-api < /tmp/backup.sql 
+heroku pg:psql --app triathlon-api < ./backup.sql 
 
 ```

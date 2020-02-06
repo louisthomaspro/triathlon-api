@@ -13,22 +13,26 @@ use App\Service\UserManager;
 use Google_Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthController extends AbstractController
 {
     /** @var UsersRepository $userRepository */
     private $usersRepository;
     private $userManager;
+    private $encoder;
 
     /**
      * AuthController Constructor
      *
      * @param UsersRepository $usersRepository
      */
-    public function __construct(UsersRepository $usersRepository, UserManager $userManager)
+    public function __construct(UsersRepository $usersRepository, UserManager $userManager, UserPasswordEncoderInterface $encoder)
     {
         $this->usersRepository = $usersRepository;
         $this->userManager = $userManager;
+        $this->encoder = $encoder;
     }
 
     /**
@@ -78,13 +82,32 @@ class AuthController extends AbstractController
         return $this->json($reponseData, 200);
     }
 
+
+
     public function login(Request $request)
     {
         $data = json_decode($request->getContent());
+        $realUser = $this->usersRepository->findOneBy(['email'=>$data->email],[]);
+
+        // Check if the user exists !
+        if(!$realUser){
+            return new Response(
+                'Username doesnt exists',
+                Response::HTTP_UNAUTHORIZED,
+                array('Content-type' => 'application/json')
+            );
+        }
+
+        if(!$this->encoder->isPasswordValid($realUser, $data->password)) {
+            return new Response(
+                'Username or Password not valid.',
+                Response::HTTP_UNAUTHORIZED,
+                array('Content-type' => 'application/json')
+            );
+        }
 
         $user = new Users();
         $user->setEmail($data->email);
-        $user->setPassword($data->password);
 
         return $this->userManager->connectUser($user);
     }
