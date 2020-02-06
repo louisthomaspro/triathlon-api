@@ -22,10 +22,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "post"={"security"="user.hasRole('ADMIN')"},
  *          "get"={"security"="user.hasRole('STORE_MANAGER')"}
  *      },
- *      itemOperations={
- *          "get"={"security"="user.hasRole('STORE_MANAGER')"},
- *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
- *      }
+*       itemOperations={
+*           "get"={"security"="user.hasRole('STORE_MANAGER')"},
+*           "delete"={"security"="user.hasRole('STORE_MANAGER')"}
+*       }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  * @UniqueEntity(fields={"email"})
@@ -61,7 +61,6 @@ class Users implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Store", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $store;
 

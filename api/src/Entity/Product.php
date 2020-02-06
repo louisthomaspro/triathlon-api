@@ -15,6 +15,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "normalization_context"={"groups"={"stores_products:read"}}
  *          }
  *      },
+*       collectionOperations={
+ *          "post"={"security"="user.hasRole('STORE_MANAGER')"},
+ *          "get"={"security"="user.hasRole('ADMIN')"}
+ *      },
  *      itemOperations={
  *          "put"={"security"="user.hasRole('SELLER')"},
  *          "get",
