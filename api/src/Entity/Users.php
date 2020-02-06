@@ -15,16 +15,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      subresourceOperations={
  *          "api_stores_users_get_subresource"={
  *              "method"="GET",
- *              "normalization_context"={"groups"={"users_products:read"}}
+ *              "normalization_context"={"groups"={"users_stores:read"}}
  *          }
  *      },
  *      collectionOperations={
- *          "post"={"security"="user.hasRole('ADMIN')"},
- *          "get"={"security"="user.hasRole('STORE_MANAGER')"}
+ *          "post"={"security"="user.hasRole('ROLE_ADMIN')"},
+ *          "get"={
+ *              "security"="user.hasRole('ROLE_STORE_MANAGER')",
+ *              "normalization_context"={"groups"={"users:read"}}
+ *          }
  *      },
  *      itemOperations={
- *          "get"={"security"="user.hasRole('STORE_MANAGER')"},
- *          "delete"={"security"="user.hasRole('STORE_MANAGER')"}
+ *          "get"={"security"="user.hasRole('ROLE_STORE_MANAGER')"},
+ *          "delete"={"security"="user.hasRole('ROLE_STORE_MANAGER')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -36,20 +39,20 @@ class Users implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"users_products:read"})
+     * @Groups({"users_stores:read", "users:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
-     * @Groups({"users_products:read"})
+     * @Groups({"users_stores:read", "users:read", "stores:read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"users_products:read"})
+     * @Groups({"users_stores:read", "users:read"})
      */
     private $roles = [];
 
@@ -61,7 +64,7 @@ class Users implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Store", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"users:read"})
      */
     private $store;
 

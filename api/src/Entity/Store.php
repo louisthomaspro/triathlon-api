@@ -7,13 +7,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *      itemOperations={
- *          "delete"={"security"="user.hasRole('ADMIN')"},
+ *          "delete"={"security"="user.hasRole('ROLE_ADMIN')"},
  *          "get"
- *      })
+ *      },
+ *      collectionOperations={
+ *          "post"={"security"="user.hasRole('ROLE_ADMIN')"},
+ *          "get"={
+ *              "security"="user.hasRole('ROLE_ADMIN')",
+ *              "normalization_context"={"groups"={"stores:read"}}
+ *          }
+ *      },
+ *      itemOperations={
+ *          "get",
+ *          "delete"={"security"="user.hasRole('ROLE_ADMIN')"}
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\StoreRepository")
  */
 class Store
@@ -22,22 +35,26 @@ class Store
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"stores:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products:read", "stores:read", "users:read"})
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="store")
+     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="store", cascade={"remove"})
+     * @Groups({"stores:read"})
      * @ApiSubresource
      */
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="store")
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="store", cascade={"remove"})
+     * @Groups({"stores:read"})
      * @ApiSubresource
      */
     private $products;

@@ -45,7 +45,7 @@ class UserManager extends AbstractController
         $data['id'] = $userData->getId();
         $data['email'] = $userData->getEmail();
         $data['roles'] = $userData->getRoles();
-        $data['store'] = $store->getId();
+        $data['store'] = is_null($store) ? null : $store->getId();
         $responseData = ['token' => $token, 'data' => $data];
 
         return $this->json($responseData, 200);
