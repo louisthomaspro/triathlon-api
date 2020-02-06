@@ -92,7 +92,7 @@ class AuthController extends AbstractController
         // Check if the user exists !
         if(!$realUser){
             return new Response(
-                'Username doesnt exists',
+                'Invalid credentials.',
                 Response::HTTP_UNAUTHORIZED,
                 array('Content-type' => 'application/json')
             );
@@ -100,7 +100,7 @@ class AuthController extends AbstractController
 
         if(!$this->encoder->isPasswordValid($realUser, $data->password)) {
             return new Response(
-                'Username or Password not valid.',
+                'Invalid credentials.',
                 Response::HTTP_UNAUTHORIZED,
                 array('Content-type' => 'application/json')
             );
