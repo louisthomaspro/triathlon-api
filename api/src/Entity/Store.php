@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *      itemOperations={
  *          "delete"={"security"="user.hasRole('ROLE_ADMIN')"},
- *          "get"
+ *          "get"={"security"="user.hasRole('ROLE_ADMIN')"}
  *      },
  *      collectionOperations={
  *          "post"={"security"="user.hasRole('ROLE_ADMIN')"},
@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          }
  *      },
  *      itemOperations={
- *          "get",
+ *          "get"={"security"="user.hasRole('ROLE_ADMIN')"},
  *          "delete"={"security"="user.hasRole('ROLE_ADMIN')"}
  *      }
  * )

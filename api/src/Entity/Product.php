@@ -12,20 +12,24 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      subresourceOperations={
  *          "api_stores_products_get_subresource"={
  *              "method"="GET",
- *              "normalization_context"={"groups"={"stores_products:read"}}
+ *              "path"="/stores/{id}/products",
+ *              "normalization_context"={"groups"={"stores_products:read"}},
+ *              "security"="user.hasRole('ROLE_ADMIN') or (user.hasRole('ROLE_SELLER') and (id == user.getStore().getId()))"
  *          }
  *      },
  *      collectionOperations={
- *          "post"={"security"="user.hasRole('ROLE_STORE_MANAGER')"},
+ *          "post"={
+ *              "security_post_denormalize"="user.hasRole('ROLE_ADMIN') or (user.hasRole('ROLE_STORE_MANAGER') and (object.getStore() == user.getStore()))"
+ *          },
  *          "get"={
  *              "security"="user.hasRole('ROLE_ADMIN')",
  *              "normalization_context"={"groups"={"products:read"}}
  *          }
  *      },
  *      itemOperations={
- *          "put"={"security"="user.hasRole('ROLE_SELLER')"},
- *          "get",
- *          "delete"={"security"="user.hasRole('ROLE_STORE_MANAGER')"}
+ *          "get"={"security"="user.hasRole('ROLE_ADMIN') or (user.hasRole('ROLE_SELLER') and (object.getStore() == user.getStore()))"},
+ *          "put"={"security"="user.hasRole('ROLE_ADMIN') or (user.hasRole('ROLE_SELLER') and (object.getStore() == user.getStore()))"},
+ *          "delete"={"security"="user.hasRole('ROLE_ADMIN') or (user.hasRole('ROLE_STORE_MANAGER') and (object.getStore() == user.getStore()))"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
